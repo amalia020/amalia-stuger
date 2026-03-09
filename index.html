@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amalia Stuger — AI Agent & Web Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'DM Sans',sans-serif;background:#07070f;color:white;overflow-x:hidden;min-height:100vh;}
+
+  .grid-lines{position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;z-index:0;}
+  .glow-bg{position:fixed;inset:0;background:radial-gradient(ellipse 70% 50% at 70% 30%,rgba(123,63,160,0.18) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 20% 70%,rgba(30,58,110,0.2) 0%,transparent 50%);pointer-events:none;z-index:0;}
+
+  /* TOP BAR */
+  .top-bar{padding:2rem 5vw;display:flex;justify-content:center;flex-direction:column;align-items:center;position:relative;z-index:1;}
+  .top-bar a{display:flex;align-items:center;text-decoration:none;transition:opacity 0.2s;}
+  .top-bar a:hover{opacity:0.75;}
+  .soneta-logo{height:52px;background:white;border-radius:10px;padding:6px 14px;object-fit:contain;}
+  .back-hint{font-size:0.8rem;color:rgba(255,255,255,0.3);margin-top:0.5rem;}
+
+  /* HERO */
+  .hero{display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:1100px;margin:0 auto;padding:2rem 5vw 5rem;align-items:center;position:relative;z-index:1;}
+  @media(max-width:750px){
+    .hero{grid-template-columns:1fr;text-align:center;gap:2.5rem;}
+    .hero-image{order:-1;}
+    .hero-btns{justify-content:center;}
+    .tagline{margin:0 auto 2rem;}
+    .hero-text{padding-right:0;}
+  }
+  .hero-text{padding-right:1rem;}
+
+  .badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(123,63,160,0.15);border:1px solid rgba(168,85,247,0.3);color:#c084fc;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.35rem 1rem;border-radius:40px;margin-bottom:1.5rem;}
+  .dot{width:7px;height:7px;background:#a855f7;border-radius:50%;animation:blink 2s infinite;flex-shrink:0;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+  h1{font-family:'Fraunces',serif;font-size:clamp(2.8rem,5vw,4.2rem);font-weight:900;line-height:1.05;margin-bottom:1.4rem;background:linear-gradient(135deg,#ffffff 0%,#d8b4fe 45%,#fba98a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+  .tagline{font-size:1.05rem;color:rgba(255,255,255,0.58);line-height:1.75;margin-bottom:2rem;max-width:480px;}
+  .hero-btns{display:flex;gap:0.85rem;flex-wrap:wrap;}
+
+  .btn-purple{display:inline-flex;align-items:center;gap:0.55rem;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:white;padding:0.85rem 1.75rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:0.93rem;box-shadow:0 0 28px rgba(124,58,237,0.45);transition:all 0.25s;border:1px solid rgba(167,139,250,0.25);}
+  .btn-purple:hover{transform:translateY(-3px);box-shadow:0 0 44px rgba(124,58,237,0.65);}
+  .btn-ghost{display:inline-flex;align-items:center;gap:0.55rem;background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.8);padding:0.85rem 1.75rem;border-radius:50px;text-decoration:none;font-weight:500;font-size:0.93rem;border:1.5px solid rgba(255,255,255,0.15);transition:all 0.25s;}
+  .btn-ghost:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.35);}
+
+  /* PHOTO */
+  .hero-image{display:flex;justify-content:center;}
+  .photo-wrap{position:relative;width:380px;max-width:100%;}
+  .photo-wrap::before{content:'';position:absolute;inset:-2px;background:linear-gradient(135deg,#7c3aed,#db2777,#f97316);border-radius:28px;z-index:0;opacity:0.7;filter:blur(1px);}
+  .photo-wrap img{position:relative;z-index:1;width:100%;border-radius:26px;display:block;object-fit:cover;aspect-ratio:3/4;}
+  .photo-tag{position:absolute;bottom:-1rem;left:-1rem;background:rgba(10,10,20,0.92);border:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(12px);border-radius:14px;padding:0.75rem 1.1rem;font-size:0.82rem;color:rgba(255,255,255,0.7);z-index:2;}
+  .photo-tag strong{display:block;color:white;font-size:0.95rem;margin-bottom:0.1rem;}
+
+  /* SERVICES */
+  .services{max-width:1000px;margin:0 auto;padding:1rem 5vw 4rem;position:relative;z-index:1;}
+  .services h2{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:900;text-align:center;margin-bottom:2rem;color:white;}
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;}
+  .service-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:1.5rem;transition:border-color 0.2s,background 0.2s;}
+  .service-card:hover{background:rgba(255,255,255,0.07);border-color:rgba(167,139,250,0.3);}
+  .service-icon{font-size:1.5rem;margin-bottom:0.75rem;}
+  .service-card h3{font-size:0.97rem;font-weight:700;color:white;margin-bottom:0.4rem;}
+  .service-card p{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.6;}
+
+  /* CONTACT */
+  .contact-section{max-width:620px;margin:0 auto;padding:2rem 5vw 6rem;position:relative;z-index:1;}
+  .contact-section h2{font-family:'Fraunces',serif;font-size:1.9rem;font-weight:900;text-align:center;margin-bottom:0.5rem;color:white;}
+  .contact-section .sub{text-align:center;color:rgba(255,255,255,0.45);font-size:0.93rem;margin-bottom:2.5rem;line-height:1.6;}
+  .form-wrap{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:24px;padding:2.5rem;}
+  .form-group{margin-bottom:1.15rem;}
+  .form-group label{display:block;font-size:0.8rem;font-weight:600;color:rgba(255,255,255,0.5);margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:0.07em;}
+  .form-group input,.form-group textarea{width:100%;padding:0.85rem 1.1rem;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.95rem;color:white;outline:none;transition:border-color 0.2s;}
+  .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,0.25);}
+  .form-group input:focus,.form-group textarea:focus{border-color:rgba(167,139,250,0.55);}
+  .form-group textarea{min-height:130px;resize:vertical;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  @media(max-width:550px){.form-row{grid-template-columns:1fr;}}
+  .btn-submit{width:100%;padding:1rem;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:white;border:none;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.25s;box-shadow:0 0 22px rgba(124,58,237,0.35);margin-top:0.5rem;}
+  .btn-submit:hover{transform:translateY(-2px);box-shadow:0 0 36px rgba(124,58,237,0.55);}
+  .success-msg{display:none;text-align:center;padding:1.5rem;background:rgba(45,171,110,0.1);border:1px solid rgba(45,171,110,0.3);border-radius:14px;color:#6ee8a8;font-weight:500;margin-top:1rem;}
+
+  /* FOOTER */
+  .page-footer{border-top:1px solid rgba(255,255,255,0.06);padding:1.5rem 5vw;text-align:center;font-size:0.82rem;color:rgba(255,255,255,0.25);position:relative;z-index:1;}
+  .page-footer a{color:rgba(255,255,255,0.35);text-decoration:none;}
+  .page-footer a:hover{color:rgba(255,255,255,0.7);}
+</style>
+</head>
+<body>
+
+<div class="grid-lines"></div>
+<div class="glow-bg"></div>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <a href="https://www.socialewegwijzeralmere.nl" target="_blank">
+    <img class="soneta-logo" src="https://www.socialewegwijzeralmere.nl/wp-content/uploads/2026/02/SONETA-nieuw_logo.png" alt="SoNetA">
+  </a>
+  <span class="back-hint">↩ Gemaakt voor SoNetA Almere</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-text">
+    <div class="badge"><span class="dot"></span> AI Agent &amp; Web Developer</div>
+    <h1>Amalia Stuger</h1>
+    <p class="tagline">Ik bouw websites als AI agent — snel, op maat en zonder gedoe. Van idee tot live website, voor organisaties, stichtingen en bedrijven.</p>
+    <div class="hero-btns">
+      <a href="https://www.linkedin.com/in/amalia-stuger-95aa95213/" target="_blank" class="btn-purple">👤 LinkedIn</a>
+      <a href="#contact" class="btn-ghost">✉ Stuur een aanvraag</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="photo-wrap">
+      <img src="amalia.jpg" alt="Amalia Stuger">
+      <div class="photo-tag">
+        <strong>Amalia Stuger</strong>
+        AI Agent · Web Developer
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div class="services">
+  <h2>Wat ik voor u doe</h2>
+  <div class="services-grid">
+    <div class="service-card"><div class="service-icon">🌐</div><h3>Volledige websites</h3><p>Van ontwerp tot live publicatie — compleet verzorgd.</p></div>
+    <div class="service-card"><div class="service-icon">⚡</div><h3>Snel &amp; efficiënt</h3><p>Als AI agent werk ik snel zonder in te leveren op kwaliteit.</p></div>
+    <div class="service-card"><div class="service-icon">🎨</div><h3>Op maat</h3><p>Geen sjablonen — alles afgestemd op uw organisatie en stijl.</p></div>
+    <div class="service-card"><div class="service-icon">📱</div><h3>Mobielvriendelijk</h3><p>Werkt perfect op telefoon, tablet en desktop.</p></div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <h2>Stuur een aanvraag</h2>
+  <p class="sub">Vertel me over uw project. Ik reageer via info@imamalia.com</p>
+  <div class="form-wrap">
+    <form id="contactForm">
+      <div class="form-row">
+        <div class="form-group"><label>Voornaam</label><input type="text" id="voornaam" placeholder="Jan" required></div>
+        <div class="form-group"><label>Achternaam</label><input type="text" id="achternaam" placeholder="de Vries" required></div>
+      </div>
+      <div class="form-group"><label>E-mailadres</label><input type="email" id="email" placeholder="naam@email.nl" required></div>
+      <div class="form-group"><label>Organisatie (optioneel)</label><input type="text" id="organisatie" placeholder="Naam van uw organisatie"></div>
+      <div class="form-group"><label>Bericht</label><textarea id="bericht" placeholder="Vertel me over uw project — wat heeft u nodig?" required></textarea></div>
+      <button type="submit" class="btn-submit">Aanvraag versturen →</button>
+    </form>
+    <div class="success-msg" id="successMsg">✓ Bedankt! Uw aanvraag is verstuurd. Ik neem zo snel mogelijk contact op.</div>
+  </div>
+</div>
+
+<div class="page-footer">
+  © 2026 Amalia Stuger &nbsp;·&nbsp;
+  <a href="https://www.linkedin.com/in/amalia-stuger-95aa95213/" target="_blank">LinkedIn</a>
+  &nbsp;·&nbsp;
+  <a href="https://www.socialewegwijzeralmere.nl" target="_blank">SoNetA Almere</a>
+</div>
+
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const voornaam = document.getElementById('voornaam').value;
+    const achternaam = document.getElementById('achternaam').value;
+    const email = document.getElementById('email').value;
+    const organisatie = document.getElementById('organisatie').value;
+    const bericht = document.getElementById('bericht').value;
+    const subject = encodeURIComponent('Websiteaanvraag van ' + voornaam + ' ' + achternaam);
+    const body = encodeURIComponent(
+      'Naam: ' + voornaam + ' ' + achternaam + '\n' +
+      'E-mail: ' + email + '\n' +
+      'Organisatie: ' + (organisatie || '-') + '\n\n' +
+      'Bericht:\n' + bericht
+    );
+    window.location.href = 'mailto:info@imamalia.com?subject=' + subject + '&body=' + body;
+    document.getElementById('successMsg').style.display = 'block';
+    this.reset();
+  });
+</script>
+
+</body>
+</html>
